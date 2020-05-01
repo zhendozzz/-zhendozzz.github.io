@@ -1,37 +1,37 @@
 <template>
-  <div>
-    <label>
-      <input
-        type="text"
-        v-model="nameInput"
-        placeholder="Введите свой вопрос"
-        @keypress.enter="onEnter()"
-      />
-    </label>
-  </div>
+  <vs-card>
+    <div slot="header">
+      <vs-row vs-justify="center">
+        <vs-input
+          type="text"
+          label-placeholder="Введите свой вопрос"
+          v-model="nameInput"
+          @keypress.enter="onEnter"
+        />
+      </vs-row>
+    </div>
+  </vs-card>
 </template>
 <script lang="ts">
-import QuestionList from "@/components/QuestionList.vue";
 import { Vue, Component } from "vue-property-decorator";
-import * as fb from "firebase";
 import { format } from "date-fns";
 
-@Component({
-  components: { questionlist: QuestionList }
-})
+@Component({})
 export default class About extends Vue {
-  usersRef = fb.database().ref("questions");
   nameInput = "";
 
   onEnter(): void {
     const date = new Date();
-    this.usersRef.push({
-      question: this.nameInput,
-      date: format(date, "dd.MM.yyyy"),
-      time: format(date, "HH:mm:ss"),
-      order: new Date().getTime()
-    });
-    this.$router.push({ path: "/" });
+    this.$store
+      .dispatch("addQuestion", {
+        question: this.nameInput,
+        date: format(date, "dd.MM.yyyy"),
+        time: format(date, "HH:mm:ss"),
+        order: new Date().getTime()
+      })
+      .then(() => {
+        this.$router.push({ path: "/" });
+      });
   }
 }
 </script>
