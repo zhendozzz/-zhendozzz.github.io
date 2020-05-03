@@ -1,4 +1,6 @@
 {
+  "anonimous": "anonimous",
+  "from": "from",
   "home_askbutton_text": "Ask",
   "home_exitbutton_text": "Exit",
   "home_enterbutton_text": "Enter",
@@ -11,6 +13,7 @@
   "login_enterbutton_text": "Enter",
   "register_autorization_text": "Authorization",
   "register_registrationbutton_text": "Registration",
+  "register_logininput_placeholder": "Login",
   "register_emailinput_placeholder": "Email",
   "register_passwordinput_placeholder": "Password",
   "register_backbutton_text": "Back",

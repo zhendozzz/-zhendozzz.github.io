@@ -29,6 +29,17 @@
       <vs-row vs-justify="center">
         <vs-input
           color="dark"
+          type="text"
+          :label-placeholder="$t('register_logininput_placeholder')"
+          :danger="login.danger"
+          :danger-text="login.dangertext"
+          v-model="login.value"
+        />
+      </vs-row>
+
+      <vs-row vs-justify="center">
+        <vs-input
+          color="dark"
           type="password"
           :label-placeholder="$t('register_passwordinput_placeholder')"
           :danger="password.danger"
@@ -60,6 +71,13 @@ import { Component } from "vue-property-decorator";
 @Component({})
 export default class Register extends Vue {
   email = {
+    success: false,
+    danger: false,
+    value: "",
+    dangertext: ""
+  };
+
+  login = {
     success: false,
     danger: false,
     value: "",
@@ -123,7 +141,8 @@ export default class Register extends Vue {
     this.$store
       .dispatch("registerUser", {
         email: this.email.value,
-        password: this.password.value
+        password: this.password.value,
+        login: this.login.value
       })
       .then(() => {
         this.$router.push("/");

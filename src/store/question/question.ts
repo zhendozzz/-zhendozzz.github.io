@@ -8,6 +8,7 @@ type QuestionType = {
   question: string;
   order: number;
   time: string;
+  login: string;
 };
 export default {
   state: {
@@ -35,7 +36,8 @@ export default {
             date: item.date,
             question: item.question,
             order: item.order,
-            time: item.time
+            time: item.time,
+            login: item.login
           });
         }
       });
@@ -53,12 +55,7 @@ export default {
     addQuestion({ commit }: any, payload: any) {
       const date = new Date();
       const usersRef = fb.database().ref("questions");
-      usersRef.push({
-        question: payload.question,
-        date: payload.date,
-        time: payload.time,
-        order: payload.order
-      });
+      usersRef.push(payload);
     }
   }
 };

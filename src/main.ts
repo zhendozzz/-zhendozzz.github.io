@@ -25,9 +25,24 @@ new Vue({
       appId: "1:507652298679:web:70d274d01670a93d5dfa32"
     });
     fb.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.$store.dispatch("autoLoginUser", user);
-      }
+      const usersRef = fb.database().ref("users");
+      usersRef
+        .limitToLast(1)
+        .orderByChild("uid")
+        .equalTo(user != null ? user.uid : "-1")
+        .on("value", a => {
+          const resUsers = a.val();
+          const resUsersKeys = Object.keys(resUsers);
+          const first =
+            resUsersKeys.length > 0 ? resUsers[resUsersKeys[0]] : {};
+          if (first) {
+            this.$store.dispatch("autoLoginUser", {
+              uid: first.uid,
+              login: first.login,
+              email: first.email
+            });
+          }
+        });
     });
   },
   render: h => h(App)

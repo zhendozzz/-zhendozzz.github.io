@@ -5,7 +5,7 @@
         $t("home_askbutton_text")
       }}</vs-button>
       <vs-chip>
-        {{ isUserLoggedIn ? email : $t("home_anonimuslabel_text") }}
+        {{ isUserLoggedIn ? login : $t("home_anonimuslabel_text") }}
       </vs-chip>
       <vs-button
         v-if="isUserLoggedIn"
@@ -34,16 +34,23 @@ export default class Home extends Vue {
   get isUserLoggedIn() {
     return this.$store.getters.isUserLoggedIn;
   }
+
   get email() {
     return this.$store.getters.email;
+  }
+
+  get login() {
+    return this.$store.getters.login;
   }
 
   ask(): void {
     this.$router.push({ path: "/new" });
   }
+
   logingIn(): void {
     this.$router.push({ path: "/login" });
   }
+
   logout(): void {
     this.$store.dispatch("logoutUser");
   }

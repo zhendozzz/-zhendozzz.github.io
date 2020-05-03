@@ -36,7 +36,9 @@ export default class NewQuestion extends Vue {
         date: format(date, "dd.MM.yyyy"),
         time: format(date, "HH:mm:ss"),
         order: new Date().getTime(),
-        user: this.$store.getters.isUserLoggedIn
+        userUID: this.$store.getters.uid,
+        email: this.$store.getters.email,
+        login: this.$store.getters.login
       })
       .then(() => {
         this.$router.push({ path: "/" });

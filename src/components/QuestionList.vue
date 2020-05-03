@@ -7,8 +7,14 @@
             {{ question.question }}
           </h3>
         </div>
-        <div>
-          <span></span>
+        <div class="addinfo">
+          <vs-row vs-justify="flex-end">
+            {{ $t("from") }}
+            {{ question.login != null ? question.login : $t("anonimous") }}
+          </vs-row>
+          <vs-row vs-justify="flex-end">
+            {{ question.date }} {{ question.time }}
+          </vs-row>
         </div>
         <div slot="footer"></div>
       </vs-card>
@@ -29,4 +35,9 @@ export default class QuestionList extends Vue {
   }
 }
 </script>
-<style scoped></style>
+<style scoped>
+.addinfo {
+  font-size: 10px;
+  color: darkgrey;
+}
+</style>
