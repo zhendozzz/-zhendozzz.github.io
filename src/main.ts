@@ -4,10 +4,14 @@ import router from "./router";
 import store from "./store";
 import * as fb from "firebase";
 import "@/plugins/index";
+import { i18n } from "@/plugins/i18n/i18n";
+import FlagIcon from "vue-flag-icon";
 
+Vue.use(FlagIcon);
 Vue.config.productionTip = false;
 
 new Vue({
+  i18n,
   router,
   store,
   created() {

@@ -2,17 +2,22 @@
   <vs-card>
     <div slot="header">
       <vs-row vs-justify="center">
-        Регистрация
+        <h3>
+          {{ $t("register_registrationbutton_text") }}
+        </h3>
       </vs-row>
       <vs-row vs-justify="center">
-        <vs-button to="/login" type="flat"> Авторизация </vs-button>
+        <vs-button to="/login" type="flat">
+          {{ $t("register_autorization_text") }}
+        </vs-button>
       </vs-row>
     </div>
     <div slot="extra-content">
       <vs-row vs-justify="center">
         <vs-input
+          color="dark"
           type="email"
-          label-placeholder="Email"
+          :label-placeholder="$t('register_emailinput_placeholder')"
           :danger="email.danger"
           :danger-text="email.dangertext"
           v-model="email.value"
@@ -22,8 +27,9 @@
 
       <vs-row vs-justify="center">
         <vs-input
+          color="dark"
           type="password"
-          label-placeholder="Пароль"
+          :label-placeholder="$t('register_passwordinput_placeholder')"
           :danger="password.danger"
           :danger-text="password.dangerText"
           v-model="password.value"
@@ -33,9 +39,11 @@
       <div slot="footer">
         <vs-row vs-type="flex" vs-justify="center">
           <vs-col vs-type="flex" vs-justify="center" vs-align="center">
-            <vs-button @click="back" type="flat"> Назад </vs-button>
-            <vs-button :disabled="!validateForm" @click="register">
-              Зарегистрироваться
+            <vs-button color="dark" @click="back" type="flat">
+              {{ $t("register_backbutton_text") }}
+            </vs-button>
+            <vs-button color="dark" :disabled="!validateForm" @click="register">
+              {{ $t("register_registerbutton_text") }}
             </vs-button>
           </vs-col>
         </vs-row>

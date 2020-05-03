@@ -1,0 +1,18 @@
+{
+  "home_askbutton_text": "Ask",
+  "home_exitbutton_text": "Exit",
+  "home_enterbutton_text": "Enter",
+  "home_anonimuslabel_text": "Anonimously",
+  "login_autorization_text": "Authorization",
+  "login_registrationbutton_text": "Registration",
+  "login_emailinput_placeholder": "Email",
+  "login_passwordinput_placeholder": "Password",
+  "login_backbutton_text": "Back",
+  "login_enterbutton_text": "Enter",
+  "register_autorization_text": "Authorization",
+  "register_registrationbutton_text": "Registration",
+  "register_emailinput_placeholder": "Email",
+  "register_passwordinput_placeholder": "Password",
+  "register_backbutton_text": "Back",
+  "register_registerbutton_text": "Register"
+}

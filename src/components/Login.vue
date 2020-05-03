@@ -2,17 +2,22 @@
   <vs-card>
     <div slot="header">
       <vs-row vs-justify="center">
-        Авторизация
+        <h3>
+          {{ $t("login_autorization_text") }}
+        </h3>
       </vs-row>
       <vs-row vs-justify="center">
-        <vs-button to="/register" type="flat"> Регистрация </vs-button>
+        <vs-button to="/register" type="flat">
+          {{ $t("login_registrationbutton_text") }}
+        </vs-button>
       </vs-row>
     </div>
     <div slot="extra-content">
       <vs-row vs-justify="center">
         <vs-input
+          color="dark"
           type="email"
-          label-placeholder="Email"
+          :label-placeholder="$t('login_emailinput_placeholder')"
           :danger="email.danger"
           :danger-text="email.dangertext"
           v-model="email.value"
@@ -22,8 +27,9 @@
 
       <vs-row vs-justify="center">
         <vs-input
+          color="dark"
           type="password"
-          label-placeholder="Пароль"
+          :label-placeholder="$t('login_passwordinput_placeholder')"
           :danger="password.danger"
           :danger-text="password.dangerText"
           v-model="password.value"
@@ -33,9 +39,11 @@
       <div slot="footer">
         <vs-row vs-type="flex" vs-justify="center">
           <vs-col vs-type="flex" vs-justify="center" vs-align="center">
-            <vs-button to="/" type="flat"> Назад </vs-button>
-            <vs-button :disabled="!validateForm" @click="login">
-              Войти
+            <vs-button to="/" type="flat" color="dark">
+              {{ $t("login_backbutton_text") }}
+            </vs-button>
+            <vs-button :disabled="!validateForm" @click="login" color="dark">
+              {{ $t("login_enterbutton_text") }}
             </vs-button>
           </vs-col>
         </vs-row>
@@ -50,6 +58,7 @@ import { Component } from "vue-property-decorator";
 
 @Component({})
 export default class Login extends Vue {
+  login_registrationbutton_text = "login_registrationbutton_text";
   email = {
     success: false,
     danger: false,

@@ -1,9 +1,11 @@
 <template>
   <div class="home">
     <vs-row vs-justify="center">
-      <vs-button @click="ask" color="dark" type="border">Спросить</vs-button>
+      <vs-button @click="ask" color="dark" type="border">{{
+        $t("home_askbutton_text")
+      }}</vs-button>
       <vs-chip>
-        {{ isUserLoggedIn ? email : "Анонимно" }}
+        {{ isUserLoggedIn ? email : $t("home_anonimuslabel_text") }}
       </vs-chip>
       <vs-button
         v-if="isUserLoggedIn"
@@ -11,11 +13,11 @@
         color="dark"
         type="border"
       >
-        Выход</vs-button
+        {{ $t("home_exitbutton_text") }}</vs-button
       >
-      <vs-button v-else @click="logingIn" color="dark" type="border"
-        >Вход</vs-button
-      >
+      <vs-button v-else @click="logingIn" color="dark" type="border">{{
+        $t("home_enterbutton_text")
+      }}</vs-button>
     </vs-row>
     <questionlist />
   </div>

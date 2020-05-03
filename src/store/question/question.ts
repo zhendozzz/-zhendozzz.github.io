@@ -27,7 +27,7 @@ export default {
     fetchQuestionList({ commit }: any, payload: any) {
       const usersRef = fb.database().ref("questions");
       const rawData: Array<QuestionType> = [];
-      usersRef.limitToLast(10).on("value", a => {
+      usersRef.limitToLast(10).once("value", a => {
         const resQuestions = a.val();
         for (const resQuestionsKey in resQuestions) {
           const item: QuestionType = resQuestions[resQuestionsKey];
