@@ -21,7 +21,9 @@
           :danger="email.danger"
           :danger-text="email.dangertext"
           v-model="email.value"
-          @input="validateEmail"
+          @input="validateEmail()"
+          ref="email"
+          @keypress.enter="enterEmailPressed"
         />
       </vs-row>
 
@@ -33,7 +35,9 @@
           :danger="password.danger"
           :danger-text="password.dangerText"
           v-model="password.value"
-          @input="validatePassword"
+          ref="password"
+          @input="validatePassword()"
+          @keypress.enter="enterPasswordPressed"
         />
       </vs-row>
       <div slot="footer">
@@ -42,7 +46,7 @@
             <vs-button to="/" type="flat" color="dark">
               {{ $t("login_backbutton_text") }}
             </vs-button>
-            <vs-button :disabled="!validateForm" @click="login" color="dark">
+            <vs-button :disabled="!validateForm()" @click="login" color="dark">
               {{ $t("login_enterbutton_text") }}
             </vs-button>
           </vs-col>
@@ -74,7 +78,7 @@ export default class Login extends Vue {
   };
   $vs: any;
 
-  get validateForm() {
+  validateForm() {
     return this.email.success && this.password.success;
   }
 
@@ -90,6 +94,7 @@ export default class Login extends Vue {
       passwordStore.dangertext = "";
     }
   }
+
   validateEmail() {
     const emailStore = this.email;
     const value = emailStore.value;
@@ -104,6 +109,20 @@ export default class Login extends Vue {
       emailStore.dangertext = "Некорректный формат email";
     }
   }
+
+  enterEmailPressed() {
+    if (this.validateForm()) {
+      const passwordField: any = this.$refs.password;
+      passwordField.focusInput();
+    }
+  }
+
+  enterPasswordPressed() {
+    if (this.validateForm()) {
+      this.login();
+    }
+  }
+
   login() {
     this.$store
       .dispatch("loginUser", {
@@ -123,6 +142,7 @@ export default class Login extends Vue {
         });
       });
   }
+
   back() {
     this.$router.push("/");
   }

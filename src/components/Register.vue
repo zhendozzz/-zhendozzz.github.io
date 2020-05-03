@@ -7,7 +7,7 @@
         </h3>
       </vs-row>
       <vs-row vs-justify="center">
-        <vs-button to="/login" type="flat">
+        <vs-button to="/login" type="flat" tabindex="10">
           {{ $t("register_autorization_text") }}
         </vs-button>
       </vs-row>
@@ -22,6 +22,7 @@
           :danger-text="email.dangertext"
           v-model="email.value"
           @input="validateEmail"
+          @keypress.enter="enterEmailPressed"
         />
       </vs-row>
 
@@ -34,6 +35,7 @@
           :danger-text="password.dangerText"
           v-model="password.value"
           @input="validatePassword"
+          @keypress.enter="enterPasswordPressed"
         />
       </vs-row>
       <div slot="footer">
@@ -84,6 +86,7 @@ export default class Register extends Vue {
       passwordStore.dangertext = "";
     }
   }
+
   validateEmail() {
     const emailStore = this.email;
     const value = emailStore.value;
@@ -99,8 +102,21 @@ export default class Register extends Vue {
     }
   }
 
-  get validateForm() {
+  enterPasswordPressed() {
+    if (this.validateForm()) {
+      this.register();
+    }
+  }
+
+  validateForm() {
     return this.email.success && this.password.success;
+  }
+
+  enterEmailPressed() {
+    if (this.validateForm()) {
+      const passwordField: any = this.$refs.password;
+      passwordField.focusInput();
+    }
   }
 
   register() {
@@ -121,6 +137,7 @@ export default class Register extends Vue {
         });
       });
   }
+
   back() {
     this.$router.push("/");
   }
