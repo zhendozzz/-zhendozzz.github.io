@@ -1,6 +1,8 @@
 {
   "anonimous": "anonimous",
   "from": "from",
+  "new_askbutton_text": "Ask",
+  "new_questioninput_placeholder": "Enter your question",
   "home_askbutton_text": "Ask",
   "home_exitbutton_text": "Exit",
   "home_enterbutton_text": "Enter",
@@ -17,5 +19,9 @@
   "register_emailinput_placeholder": "Email",
   "register_passwordinput_placeholder": "Password",
   "register_backbutton_text": "Back",
-  "register_registerbutton_text": "Register"
+  "register_registerbutton_text": "Register",
+  "deletion_confirm": "Confirm",
+  "are_you_sure?" : "are you sure?",
+  "cancel":  "Cancel",
+  "accept": "Accept"
 }

@@ -6,14 +6,14 @@
           <vs-input
             color="dark"
             type="text"
-            label-placeholder="Введите свой вопрос"
+            :label-placeholder="$t('new_questioninput_placeholder')"
             v-model="question"
             @keypress.enter="onEnter"
           />
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center">
           <vs-button :disabled="!validateForm()" @click="onEnter" color="dark">
-            {{ $t("login_enterbutton_text") }}
+            {{ $t("new_askbutton_text") }}
           </vs-button>
         </vs-col>
       </vs-row>

@@ -32,15 +32,17 @@ new Vue({
         .equalTo(user != null ? user.uid : "-1")
         .on("value", a => {
           const resUsers = a.val();
-          const resUsersKeys = Object.keys(resUsers);
-          const first =
-            resUsersKeys.length > 0 ? resUsers[resUsersKeys[0]] : {};
-          if (first) {
-            this.$store.dispatch("autoLoginUser", {
-              uid: first.uid,
-              login: first.login,
-              email: first.email
-            });
+          if (resUsers) {
+            const resUsersKeys = Object.keys(resUsers);
+            const first =
+                resUsersKeys.length > 0 ? resUsers[resUsersKeys[0]] : {};
+            if (first) {
+              this.$store.dispatch("autoLoginUser", {
+                uid: first.uid,
+                login: first.login,
+                email: first.email
+              });
+            }
           }
         });
     });

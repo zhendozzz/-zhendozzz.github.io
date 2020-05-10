@@ -4,6 +4,7 @@ import * as fb from "firebase";
 
 Vue.use(Vuex);
 type QuestionType = {
+  id: string;
   date: string;
   question: string;
   order: number;
@@ -27,12 +28,13 @@ export default {
   actions: {
     fetchQuestionList({ commit }: any, payload: any) {
       const usersRef = fb.database().ref("questions");
-      const rawData: Array<QuestionType> = [];
-      usersRef.limitToLast(10).once("value", a => {
+      usersRef.limitToLast(10).on("value", a => {
+        const rawData: Array<QuestionType> = [];
         const resQuestions = a.val();
         for (const resQuestionsKey in resQuestions) {
           const item: QuestionType = resQuestions[resQuestionsKey];
           rawData.push({
+            id: resQuestionsKey,
             date: item.date,
             question: item.question,
             order: item.order,
@@ -40,22 +42,26 @@ export default {
             login: item.login
           });
         }
+        rawData.sort(function(b, a) {
+          if (a.order > b.order) {
+            return 1;
+          }
+          if (a.order < b.order) {
+            return -1;
+          }
+          return 0;
+        });
+        commit("setQuestions", rawData);
       });
-      rawData.sort(function(b, a) {
-        if (a.order > b.order) {
-          return 1;
-        }
-        if (a.order < b.order) {
-          return -1;
-        }
-        return 0;
-      });
-      commit("setQuestions", rawData);
     },
     addQuestion({ commit }: any, payload: any) {
       const date = new Date();
-      const usersRef = fb.database().ref("questions");
-      usersRef.push(payload);
+      const questionsRef = fb.database().ref("questions");
+      questionsRef.push(payload);
+    },
+    deleteQuestion({ commit }: any, payload: any){
+      const questionRef = fb.database().ref("questions/"+payload);
+      questionRef.remove()
     }
   }
 };
