@@ -4,6 +4,7 @@ import * as fb from "firebase";
 
 Vue.use(Vuex);
 type QuestionType = {
+  comments: [];
   id: string;
   date: string;
   question: string;
@@ -39,7 +40,8 @@ export default {
             question: item.question,
             order: item.order,
             time: item.time,
-            login: item.login
+            login: item.login,
+            comments: item.comments
           });
         }
         rawData.sort(function(b, a) {
@@ -59,9 +61,16 @@ export default {
       const questionsRef = fb.database().ref("questions");
       questionsRef.push(payload);
     },
-    deleteQuestion({ commit }: any, payload: any){
-      const questionRef = fb.database().ref("questions/"+payload);
-      questionRef.remove()
+    deleteQuestion({ commit }: any, payload: any) {
+      const questionRef = fb.database().ref("questions/" + payload);
+      questionRef.remove();
+    },
+    addComment({ commit }: any, payload: any) {
+      const date = new Date();
+      const questionsRef = fb
+        .database()
+        .ref("questions/" + payload.questionId + "/comments");
+      questionsRef.push(payload.comment);
     }
   }
 };

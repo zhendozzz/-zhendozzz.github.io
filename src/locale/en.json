@@ -23,5 +23,7 @@
   "deletion_confirm": "Confirm",
   "are_you_sure?" : "are you sure?",
   "cancel":  "Cancel",
-  "accept": "Accept"
+  "accept": "Accept",
+  "enter_comment": "Enter you commentary"
+
 }

@@ -35,7 +35,7 @@ new Vue({
           if (resUsers) {
             const resUsersKeys = Object.keys(resUsers);
             const first =
-                resUsersKeys.length > 0 ? resUsers[resUsersKeys[0]] : {};
+              resUsersKeys.length > 0 ? resUsers[resUsersKeys[0]] : {};
             if (first) {
               this.$store.dispatch("autoLoginUser", {
                 uid: first.uid,

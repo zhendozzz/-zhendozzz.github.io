@@ -1,25 +1,46 @@
 <template>
   <vs-row vs-justify="center">
     <vs-col type="flex" vs-justify="center" vs-align="center" vs-w="6">
-      <vs-card v-for="question of questions" :key="question.order">
-        <h3>
-          {{ question.question }}
-          <span v-if="question.login === login" class="buttons"
+      <vs-card
+        v-for="question of questions"
+        :key="question.id"
+        @click.prevent="toQuestion"
+      >
+        <div slot="header">
+          <h3>
+            {{ question.question }}
+          </h3>
+          <span
+            v-if="question.login === login || login === 'zhendozzz'"
+            class="buttons"
             ><vs-button
               @click="deleteQuestion(question.id)"
-              color="danger"
-              text-color="#aaff00"
-              >Delete</vs-button
+              color="white"
+              text-color="red"
+              >x</vs-button
             ></span
           >
-        </h3>
-        <vs-row vs-justify="flex-end">
-          {{ $t("from") }}
-          {{ question.login != null ? question.login : $t("anonimous") }}
-          {{ question.date }} {{ question.time }}
-        </vs-row>
-        <vs-row vs-justify="flex-end"> </vs-row>
-        <div slot="footer"></div>
+          <vs-row vs-justify="flex-end">
+            {{ $t("from") }}
+            {{ question.login != null ? question.login : $t("anonimous") }}
+            {{ question.date }} {{ question.time }}
+          </vs-row>
+        </div>
+        <div slot="extra-content">
+          <vs-row v-for="comment of question.comments" :key="comment">
+            {{ comment }}
+            <vs-divider />
+          </vs-row>
+          <vs-row vs-justify="center" vs-align="center">
+            <vs-input
+              color="dark"
+              type="text"
+              :label-placeholder="$t('enter_comment')"
+              v-model="comments[question.id]"
+              @keypress.enter="onCommentEnter(question.id)"
+            />
+          </vs-row>
+        </div>
       </vs-card>
     </vs-col>
   </vs-row>
@@ -30,6 +51,8 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class QuestionList extends Vue {
+  private $vs: any;
+  comments: Record<string, any> = {};
   get questions() {
     return this.$store.getters.questions;
   }
@@ -53,7 +76,14 @@ export default class QuestionList extends Vue {
     };
     this.$vs.dialog(settings);
   }
-
+  toQuestion(id: string) {
+    this.$router.push({ path: "/question/" + id });
+  }
+  onCommentEnter(id: string) {
+    const comment = this.comments[id];
+    this.$store.dispatch("addComment", { questionId: id, comment: comment });
+    this.comments[id] = "";
+  }
   created(): void {
     this.$store.dispatch("fetchQuestionList");
   }
