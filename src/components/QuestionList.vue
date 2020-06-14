@@ -33,12 +33,13 @@
           </vs-row>
           <vs-row vs-justify="center" vs-align="center">
             <vs-input
+              class="commentInput"
               color="dark"
               type="text"
               :label-placeholder="$t('enter_comment')"
               v-model="comments[question.id]"
               @keypress.enter="onCommentEnter(question.id)"
-            />
+            ></vs-input>
           </vs-row>
         </div>
       </vs-card>
@@ -68,8 +69,8 @@ export default class QuestionList extends Vue {
       color: "danger",
       title: this.$t("deletion_confirm"),
       text: this.$t("are_you_sure?"),
-      "accept-text": this.$t("accept"),
-      "cancel-text": this.$t("cancel"),
+      acceptText: this.$t("accept"),
+      cancelText: this.$t("cancel"),
       accept: function() {
         dispatch("deleteQuestion", id);
       }
@@ -97,5 +98,8 @@ export default class QuestionList extends Vue {
 .buttons {
   float: right;
   font-size: 10px;
+}
+.commentInput {
+  padding-bottom: 15px;
 }
 </style>

@@ -21,9 +21,9 @@
   "register_backbutton_text": "Back",
   "register_registerbutton_text": "Register",
   "deletion_confirm": "Confirm",
-  "are_you_sure?" : "are you sure?",
-  "cancel":  "Cancel",
+  "are_you_sure?": "are you sure?",
+  "cancel": "Cancel",
   "accept": "Accept",
-  "enter_comment": "Enter you commentary"
-
+  "enter_comment": "Enter you commentary",
+  "loading": "Loading"
 }
