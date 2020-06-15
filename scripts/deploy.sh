@@ -7,7 +7,7 @@ set -e
 npm run build
 cp CNAME $dir/CNAME
 cd $dir
-rm -rf *.map.js
+rm -r js/*.map
 
 git init
 git add -A
