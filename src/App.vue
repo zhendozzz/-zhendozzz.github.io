@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div v-if="userInited" id="app">
     <a
       href=""
       v-if="getCurrentLocale() === 'ru'"
@@ -18,17 +18,29 @@
     </a>
     <router-view />
   </div>
+  <div v-else>
+    <LoaderComponent></LoaderComponent>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-@Component
+import LoaderComponent from "@/components/LoaderComponent.vue";
+
+@Component({
+  components: {
+    LoaderComponent
+  }
+})
 export default class App extends Vue {
   getCurrentLocale() {
     return this.$i18n.locale;
   }
   setCurrentLocale(locale: string) {
     this.$i18n.locale = locale;
+  }
+  get userInited() {
+    return this.$store.getters.userInited;
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isUserInited" class="home">
+  <div class="home">
     <vs-row vs-justify="center">
       <vs-button @click="ask" color="dark" type="border"
         >{{ $t("home_askbutton_text") }}
@@ -21,20 +21,15 @@
     </vs-row>
     <QuestionList />
   </div>
-  <div v-else>
-    <LoaderComponent></LoaderComponent>
-  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import QuestionList from "@/components/QuestionList.vue";
-import LoaderComponent from "@/components/LoaderComponent.vue";
 
 @Component({
   components: {
-    QuestionList,
-    LoaderComponent
+    QuestionList
   }
 })
 export default class Home extends Vue {
@@ -48,10 +43,6 @@ export default class Home extends Vue {
 
   get login() {
     return this.$store.getters.login;
-  }
-
-  get isUserInited() {
-    return this.$store.getters.isUserInited;
   }
 
   ask(): void {

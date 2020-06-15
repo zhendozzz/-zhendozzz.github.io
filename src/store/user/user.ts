@@ -12,7 +12,6 @@ export default {
     },
     mutations: {
         setUser(state: any, payload: any) {
-            state.userInited = true;
             if (payload != null) {
                 state.uid = payload.uid;
                 state.email = payload.email;
@@ -22,6 +21,9 @@ export default {
                 state.email = null;
                 state.login = null;
             }
+        },
+        setUserInited(state: any, payload: any){
+            state.userInited = payload.userInited;
         }
     },
     getters: {
@@ -37,7 +39,7 @@ export default {
         email(state: any) {
             return state.email;
         },
-        isUserInited(state: any) {
+        userInited(state: any) {
             return state.userInited;
         }
     },
@@ -111,6 +113,9 @@ export default {
         },
         autoLoginUser({commit}: any, payload: any) {
             commit("setUser", payload);
+        },
+        userInited({commit}: any, payload: any) {
+            return commit("setUserInited", payload)
         }
     }
 };
