@@ -28,6 +28,9 @@ export default {
   },
   actions: {
     fetchQuestionList({ commit }: any, payload: any) {
+      commit("setUserInited", {
+        userInited: false
+      });
       const usersRef = fb.database().ref("questions");
       usersRef.limitToLast(10).on("value", a => {
         const rawData: Array<QuestionType> = [];
@@ -54,6 +57,9 @@ export default {
           return 0;
         });
         commit("setQuestions", rawData);
+        commit("setUserInited", {
+          userInited: true
+        });
       });
     },
     addQuestion({ commit }: any, payload: any) {
