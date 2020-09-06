@@ -5,7 +5,6 @@ dir="dist"
 set -e
 
 npm run build
-cp CNAME $dir/CNAME
 cd $dir
 rm -r js/*.map
 
